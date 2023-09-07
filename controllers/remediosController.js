@@ -11,8 +11,8 @@ const exibirFormulario = (req, res) => {
 
 const cadastrarRemedio = (req, res) => {
   const { nome, descricao, indicacao, modoDeUsar, efeitosColaterais } = req.body;
-  remedioModel.cadastrarRemedio({ nome, descricao, indicacao, modoDeUsar, efeitosColaterais });
+  remedioModel.cadastrarRemedio({nome, descricao, indicacao, modoDeUsar, efeitosColaterais });
   res.redirect('/');
 };
 
-module.exports = { listarRemedios, exibirFormulario, cadastrarRemedio };
+module.exports = {listarRemedios, exibirFormulario, cadastrarRemedio };

@@ -34,7 +34,7 @@ app.use(session({
   saveUninitialized: true
 }));
 
-app.get('/login', (req, res) => {
+app.get('/', (req, res) => {
     res.render('login');
   });
   
@@ -65,7 +65,7 @@ app.get('/logout', (req, res) => {
     });
 });
 
-app.get('/', remediosController.listarRemedios);
+app.get('/cadastro', remediosController.listarRemedios);
 app.get('/cadastro', remediosController.exibirFormulario);
 app.post('/cadastro', remediosController.cadastrarRemedio);
 
