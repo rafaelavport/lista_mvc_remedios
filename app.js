@@ -49,7 +49,7 @@ app.get('/', (req, res) => {
     } else {
       res.send('Credenciais inválidas. <a href="/login">Tente novamente</a>');
     }
-  });
+  })
 
   app.get('/restrito', (req, res) => {
     if (req.session.loggedin) {
@@ -57,18 +57,18 @@ app.get('/', (req, res) => {
     } else {
       res.send('Você não está autenticado. <a href="/login">Faça login</a>');
     }
-  });
+  })
   
 app.get('/logout', (req, res) => {
     req.session.destroy(() => {
-        res.redirect('/');
+        res.redirect('/')
     });
 });
 
-app.get('/cadastro', remediosController.listarRemedios);
-app.get('/cadastro', remediosController.exibirFormulario);
-app.post('/cadastro', remediosController.cadastrarRemedio);
+app.get('/', remediosController.listarRemedios)
+app.get('/cadastro', remediosController.exibirFormulario)
+app.post('/cadastro', remediosController.cadastrarRemedio)
 
 app.listen(3000, () => {
-  console.log('Servidor rodando em http://localhost:3000');
-});
+  console.log('Servidor rodando em http://localhost:3000')
+})
