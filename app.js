@@ -41,8 +41,7 @@ app.get('/', (req, res) => {
   app.post('/login', (req, res) => {
     const { username, password } = req.body;
   
-    // Verifique as credenciais (isso é apenas um exemplo, em um ambiente de produção, você usaria autenticação adequada)
-    if (username === '' && password === '') {
+    if (username>0 && password>0) {
       req.session.loggedin = true;
       req.session.username = username;
       res.redirect('/cadastro');
