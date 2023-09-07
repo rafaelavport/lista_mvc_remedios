@@ -65,7 +65,7 @@ app.get('/logout', (req, res) => {
     });
 });
 
-app.get('/cadastro', remediosController.listarRemedios);
+app.get('/', remediosController.listarRemedios);
 app.get('/cadastro', remediosController.exibirFormulario);
 app.post('/cadastro', remediosController.cadastrarRemedio);
 
