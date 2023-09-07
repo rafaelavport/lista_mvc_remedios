@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lista de Remédios</title>
+</head>
+<body>
+  <h1>Lista de Remédios</h1>
+  <ul>
+    <% remedios.forEach(remedio => { %>
+      <li><%= remedio.nome %></li>
+    <% }); %>
+  </ul>
+  <a href="/cadastro">Cadastrar Novo Remédio</a>
+</body>
+</html>

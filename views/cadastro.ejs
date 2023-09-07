@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cadastro de Remédio</title>
+</head>
+<body>
+  <h1>Cadastro de Remédio</h1>
+  <form method="POST" action="/cadastro">
+    
+    <label for="nome">Nome do Remédio:</label>
+    <input type="text" id="nome" name="nome" required><br>
+
+    <label for="descricao">Descrição:</label>
+    <textarea id="descricao" name="descricao" required></textarea><br>
+
+    <label for="indicacao">Indicação:</label>
+    <input type="text" id="indicacao" name="indicacao" required><br>
+
+    <label for="modoDeUsar">Modo de Usar:</label>
+    <textarea id="modoDeUsar" name="modoDeUsar" required></textarea><br>
+
+    <label for="efeitosColaterais">Efeitos Colaterais:</label>
+    <textarea id="efeitosColaterais" name="efeitosColaterais" required></textarea><br>
+
+    <input type="submit" value="Cadastrar">
+  </form>
+</body>
+</html>
