@@ -45,7 +45,7 @@ app.get('/', (req, res) => {
     if (username === 'usuario' && password === '123456') {
       req.session.loggedin = true;
       req.session.username = username;
-      res.redirect('/');
+      res.redirect('/cadastro');
     } else {
       res.send('Credenciais inválidas. <a href="/login">Tente novamente</a>');
     }
@@ -65,7 +65,7 @@ app.get('/logout', (req, res) => {
     });
 });
 
-app.get('/', remediosController.listarRemedios);
+app.get('/cadastro', remediosController.listarRemedios);
 app.get('/cadastro', remediosController.exibirFormulario);
 app.post('/cadastro', remediosController.cadastrarRemedio);
 
