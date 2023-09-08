@@ -9,6 +9,9 @@
     <% remedios.forEach(remedio => { %>
       <ul><%= remedio.nome %></ul>
       <li><%= remedio.descricao %></li>
+      <li><%= remedio.indicacao %></li>
+      <li><%= remedio.modoDeUsar %></li>
+      <li><%= remedio.efeitosColaterais %></li>
     <% }); %>
   </ul>
   <a href="/formulario">Cadastrar Novo Remédio</a>
