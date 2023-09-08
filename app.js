@@ -66,7 +66,7 @@ app.get('/logout', (req, res) => {
 
 app.get('/cadastro', remediosController.listarRemedios)
 app.get('/formulario', remediosController.exibirFormulario)
-app.post('/cadastro', remediosController.cadastrarRemedio)
+app.post('/cadastrar', remediosController.cadastrarRemedio)
 
 app.listen(3000, () => {
   console.log('Servidor rodando em http://localhost:3000')
