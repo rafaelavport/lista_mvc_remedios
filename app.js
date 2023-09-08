@@ -41,7 +41,7 @@ app.get('/', (req, res) => {
   app.post('/login', (req, res) => {
     const { username, password } = req.body;
   
-    if (username>0 && password>0) {
+    if (username === 'usuario' && password === '123456') {
       req.session.loggedin = true;
       req.session.username = username;
       res.redirect('/cadastro');
