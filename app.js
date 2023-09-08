@@ -65,7 +65,7 @@ app.get('/logout', (req, res) => {
 });
 
 app.get('/cadastro', remediosController.listarRemedios)
-app.get('/cadastro', remediosController.exibirFormulario)
+app.get('/formulario', remediosController.exibirFormulario)
 app.post('/cadastro', remediosController.cadastrarRemedio)
 
 app.listen(3000, () => {
