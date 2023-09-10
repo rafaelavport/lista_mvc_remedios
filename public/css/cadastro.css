@@ -4,3 +4,8 @@ body{
     text-align: center;
     margin-top: 15vh;
 }
+
+body input{
+    padding: 1vh;
+    margin: 1vh;
+}
