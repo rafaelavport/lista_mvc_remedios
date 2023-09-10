@@ -6,6 +6,8 @@ body{
 }
 
 body input{
+    width: 10vw;
+    height: 2vh;
     padding: 1vh;
     margin: 1vh;
 }
