@@ -1,8 +1,8 @@
 body{
     background-color: rgb(255, 255, 255);
     font-family: monospace;
-    text-align: center;
-    margin-top: 15vh;
+    margin-left: 40vw;
+    margin-top: 20vh;
 }
 
 body input{
