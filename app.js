@@ -55,7 +55,7 @@ app.post('/login', async (req, res) => {
         res.send('Nome de usuário já existe. Escolha outro nome de usuário.');
       } else {
         // Nome de usuário não existe, então podemos criar um novo registro
-        const insertUserQuery = `INSERT INTO usuario (username, password) VALUES (?, ?)`;
+        const insertUserQuery = `INSERT INTO usuario (username, password) VALUES (${username}, ${password})`;
         const hashedPassword = md5(password);
 
         db.query(insertUserQuery, [username, hashedPassword], (err, result) => {
