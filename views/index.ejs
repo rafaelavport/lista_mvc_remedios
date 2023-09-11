@@ -18,7 +18,31 @@
     <% }); %>
   </ul>
   <a href="/formulario">Cadastrar Novo Remédio</a>
-  <a href="/formulario">Editar</a>
-  <a href="/formulario">Excluir</a>
+  <button onclick="editarRemedio('<%= remedio.id %>')">Editar</button>
+  <button onclick="excluirRemedio('<%= remedio.id %>')">Excluir</button>
+
+  <script>
+    function editarRemedio(remedioId) {
+      window.location.href = `/formulario/${remedioId}`;
+    }
+  
+    function excluirRemedio(remedioId) {
+      fetch(`/excluir-remedio/${remedioId}`, {
+        method: 'DELETE',
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            window.location.reload();
+          } else {
+            console.error('Erro 1 ao excluir o remédio:', data.error);
+          }
+        })
+        .catch(error => {
+          console.error('Erro 2 ao excluir o remédio:', error);
+        });
+    }
+  </script>
+
 </body>
 </html>
