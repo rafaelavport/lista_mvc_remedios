@@ -5,7 +5,6 @@ const mysql = require('mysql2/promise');
             const conexao = await mysql.createConnection({
                 host: "sql10.freemysqlhosting.net",
                 user: "sql10645653",
-                port: 3306,
                 password: "MwTchJcYu3",
                 database: "sql10645653"
             });

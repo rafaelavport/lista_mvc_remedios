@@ -7,11 +7,10 @@ const remediosController = require('./controllers/remediosController');
 const mysql = require('mysql2');
 
 const connection = mysql.createConnection({
-  host: 'localhost', 
-  port: 3306,
-  user: 'usuario',
-  password: '123456',
-  database: 'lista-tarefas', 
+  host: "sql10.freemysqlhosting.net",
+  user: "sql10645653",
+  password: "MwTchJcYu3",
+  database: "sql10645653"
 });
 
 connection.connect((err) => {
@@ -67,6 +66,6 @@ app.get('/cadastro', remediosController.listarRemedios)
 app.get('/formulario', remediosController.exibirFormulario)
 app.post('/cadastrar', remediosController.cadastrarRemedio)
 
-app.listen(3000, () => {
-  console.log('Servidor rodando em http://localhost:3000')
+app.listen(10000, () => {
+  console.log('Servidor rodando em http://0.0.0.0:10000')
 })
