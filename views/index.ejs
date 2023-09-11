@@ -11,31 +11,12 @@
     <% remedios.forEach(remedio => { %>
       <li><%= remedio.nome %></li>
       <ul><%= remedio.descricao %></ul>
-      <ul class="detalhes hidden"><%= remedio.indicacao %></ul>
-      <ul class="detalhes hidden"><%= remedio.modoDeUsar %></ul>
-      <ul class="detalhes hidden"><%= remedio.efeitosColaterais %></ul>
-      <button class="ver-mais">Ver Mais</button>
-      <button class="ver-menos hidden">Ver Menos</button>
+      <ul><%= remedio.descricao %></ul>
+      <ul><%= remedio.indicacao %></ul>
+      <ul><%= remedio.modoDeUsar %></ul>
+      <ul><%= remedio.efeitosColaterais %></ul>
     <% }); %>
   </ul>
-
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    $(document).ready(function() {
-      $(".ver-mais").on("click", function() {
-        $(this).siblings(".detalhes").removeClass("hidden");
-        $(this).addClass("hidden");
-        $(this).siblings(".ver-menos").removeClass("hidden");
-      });
-  
-      $(".ver-menos").on("click", function() {
-        $(this).siblings(".detalhes").addClass("hidden");
-        $(this).addClass("hidden");
-        $(this).siblings(".ver-mais").removeClass("hidden");
-      });
-    });
-  </script>
-  
   <a href="/formulario">Cadastrar Novo Remédio</a>
   <a href="/formulario">Editar</a>
   <a href="/formulario">Excluir</a>
