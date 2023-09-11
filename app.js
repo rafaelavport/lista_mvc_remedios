@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const remediosController = require('./controllers/remediosController');
 const mysql = require('mysql2');
+const md5 = require('md5');
 
 const connection = mysql.createConnection({
   host: "sql10.freemysqlhosting.net",
@@ -33,20 +34,46 @@ app.use(session({
 }));
 
 app.get('/', (req, res) => {
-    res.render('login');
-  });
-  
-  app.post('/login', (req, res) => {
-    const { username, password } = req.body;
-  
-    if (username === 'usuario' && password === '123456') {
-      req.session.loggedin = true;
-      req.session.username = username;
-      res.redirect('/cadastro');
-    } else {
-      res.send('Credenciais inválidas. <a href="/login">Tente novamente</a>');
-    }
-  })
+  res.render('login');
+});
+
+app.post('/login', async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    // Consultar o banco de dados para verificar se o nome de usuário já existe
+    const checkUserQuery = `SELECT * FROM usuario WHERE username = ${username}`;
+
+    db.query(checkUserQuery, [username], (err, results) => {
+      if (err) {
+        console.error('Erro na consulta ao banco de dados: ' + err.message);
+        res.status(500).send('Erro interno no s1dor');
+        return;
+      }
+
+      if (results.length > 0) {
+        res.send('Nome de usuário já existe. Escolha outro nome de usuário.');
+      } else {
+        const insertUserQuery = `INSERT INTO usuario (username, password) VALUES (${username}, ${password})`;
+        const hashedPassword = md5(password);
+
+        db.query(insertUserQuery, [username, hashedPassword], (err, result) => {
+          if (err) {
+            console.error('Erro na inserção do usuário: ' + err.message);
+            res.status(500).send('Erro inter2no no servidor');
+            return;
+          }
+
+          res.send('Usuário cadastrado com sucesso.');
+        });
+      }
+    });
+  } catch (err) {
+    console.error('Erro no cadastro do usuário: ' + err.message);
+    res.status(500).send('Erro interno no servidor');
+  }
+});
+
 
   app.get('/restrito', (req, res) => {
     if (req.session.loggedin) {
