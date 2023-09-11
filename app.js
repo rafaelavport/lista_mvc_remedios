@@ -6,6 +6,7 @@ const path = require('path');
 const remediosController = require('./controllers/remediosController');
 const mysql = require('mysql2');
 const md5 = require('md5');
+const multer = require('multer');
 
 const connection = mysql.createConnection({
   host: "sql10.freemysqlhosting.net",
@@ -83,9 +84,7 @@ app.post('/login', async (req, res) => {
     }
   })
 
-  const multer = require('multer');
 const storage = multer.diskStorage({
-
   destination: function (req, file, cb) {
     cb(null, 'public/uploads/');
   },
@@ -101,7 +100,7 @@ app.post('/cadastrar', upload.single('foto'), (req, res) => {
   const { nome, descricao, indicacao, modoDeUsar, efeitosColaterais } = req.body;
   const foto = req.file.filename; // Nome do arquivo de imagem gerado pelo multer
 
-  const insertRemedioQuery = `INSERT INTO remedios (nome, foto, descricao, indicacao, modoDeUsar, efeitosColaterais) VALUES (?, ?, ?, ?, ?, ?)`;
+const insertRemedioQuery = `INSERT INTO remedios (nome, foto, descricao, indicacao, modoDeUsar, efeitosColaterais) VALUES (?, ?, ?, ?, ?, ?)`;
 
   connection.query(
     insertRemedioQuery,
