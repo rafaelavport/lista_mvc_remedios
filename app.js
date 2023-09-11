@@ -84,40 +84,6 @@ app.post('/login', async (req, res) => {
     }
   })
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'public/uploads/');
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, file.fieldname + '-' + uniqueSuffix + '-' + file.originalname);
-  },
-});
-
-const upload = multer({ storage: storage });
-
-app.post('/cadastrar', upload.single('foto'), (req, res) => {
-  const { nome, descricao, indicacao, modoDeUsar, efeitosColaterais } = req.body;
-  const foto = req.file.filename; // Nome do arquivo de imagem gerado pelo multer
-
-const insertRemedioQuery = `INSERT INTO remedios (nome, foto, descricao, indicacao, modoDeUsar, efeitosColaterais) VALUES (?, ?, ?, ?, ?, ?)`;
-
-  connection.query(
-    insertRemedioQuery,
-    [nome, foto, descricao, indicacao, modoDeUsar, efeitosColaterais],
-    (err, result) => {
-      if (err) {
-        console.error('Erro ao cadastrar o remédio: ' + err.message);
-        res.status(500).send('Erro 1 interno no servidor');
-        return;
-      }
-
-      console.log('Remédio cadastrado com sucesso.');
-      res.redirect('/cadastro');
-    }
-  );
-});
-
 app.get('/logout', (req, res) => {
     req.session.destroy(() => {
         res.redirect('/')
