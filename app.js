@@ -41,26 +41,25 @@ app.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
   try {
-    // Consultar o banco de dados para verificar se o nome de usuário já existe
-    const checkUserQuery = `SELECT * FROM usuario WHERE username = ${username}`;
+    const checkUserQuery = `SELECT * FROM usuario WHERE username = ?`;
 
-    db.query(checkUserQuery, [username], (err, results) => {
+    connection.query(checkUserQuery, [username], (err, results) => {
       if (err) {
         console.error('Erro na consulta ao banco de dados: ' + err.message);
-        res.status(500).send('Erro interno no s1dor');
+        res.status(500).send('Erro interno no 1servidor');
         return;
       }
 
       if (results.length > 0) {
         res.send('Nome de usuário já existe. Escolha outro nome de usuário.');
       } else {
-        const insertUserQuery = `INSERT INTO usuario (username, password) VALUES (${username}, ${password})`;
+        const insertUserQuery = `INSERT INTO usuario (username, password) VALUES (?, ?)`;
         const hashedPassword = md5(password);
 
-        db.query(insertUserQuery, [username, hashedPassword], (err, result) => {
+        connection.query(insertUserQuery, [username, hashedPassword], (err, result) => {
           if (err) {
             console.error('Erro na inserção do usuário: ' + err.message);
-            res.status(500).send('Erro inter2no no servidor');
+            res.status(500).send('Erro interno no 2servidor');
             return;
           }
 
@@ -70,10 +69,9 @@ app.post('/login', async (req, res) => {
     });
   } catch (err) {
     console.error('Erro no cadastro do usuário: ' + err.message);
-    res.status(500).send('Erro interno no ser232vidor');
+    res.status(500).send('Erro interno no 3servidor');
   }
 });
-
 
   app.get('/restrito', (req, res) => {
     if (req.session.loggedin) {
