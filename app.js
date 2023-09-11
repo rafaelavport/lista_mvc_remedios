@@ -63,8 +63,7 @@ app.post('/login', async (req, res) => {
             return;
           }
 
-          res.send('Usuário cadastrado com sucesso.');
-          res.render('/cadastro');
+          console.log('Usuário cadastrado com sucesso.');
         });
       }
     });
