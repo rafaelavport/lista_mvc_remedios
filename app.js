@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const remediosController = require('./controllers/remediosController');
 const mysql = require('mysql2');
-const md5 = require('md5');
 
 const connection = mysql.createConnection({
   host: "sql10.freemysqlhosting.net",
@@ -41,37 +40,25 @@ app.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
   try {
-    // Consultar o banco de dados para verificar se o nome de usuário já existe
-    const checkUserQuery = `SELECT * FROM usuario WHERE username = ${username}`;
+      const query = `SELECT * FROM usuario WHERE username = ? AND password = ?`;
+      const hashedPassword = md5(password);
 
-    db.query(checkUserQuery, [username], (err, results) => {
-      if (err) {
-        console.error('Erro na consulta ao banco de dados: ' + err.message);
-        res.status(500).send('Erro interno no servidor');
-        return;
-      }
-
-      if (results.length > 0) {
-        res.send('Nome de usuário já existe. Escolha outro nome de usuário.');
-      } else {
-        // Nome de usuário não existe, então podemos criar um novo registro
-        const insertUserQuery = `INSERT INTO usuario (username, password) VALUES (${username}, ${password})`;
-        const hashedPassword = md5(password);
-
-        db.query(insertUserQuery, [username, hashedPassword], (err, result) => {
+      db.query(query, [username, hashedPassword], (err, results) => {
           if (err) {
-            console.error('Erro na inserção do usuário: ' + err.message);
-            res.status(500).send('Erro interno no servidor');
-            return;
+              console.error('Erro na consulta ao banco de dados: ' + err.message);
+              res.status(500).send('Erro interno no servidor');
+              return;
           }
 
-          res.send('Usuário cadastrado com sucesso.');
-        });
-      }
-    });
+          if (results.length > 0) {
+              res.send('Login bem-sucedido');
+          } else {
+              res.send('Login falhou. Verifique suas credenciais.');
+          }
+      });
   } catch (err) {
-    console.error('Erro no cadastro do usuário: ' + err.message);
-    res.status(500).send('Erro interno no servidor');
+      console.error('Erro no login: ' + err.message);
+      res.status(500).send('Erro interno no servidor');
   }
 });
 
