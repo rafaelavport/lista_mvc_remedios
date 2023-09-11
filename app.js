@@ -70,7 +70,7 @@ app.post('/login', async (req, res) => {
     });
   } catch (err) {
     console.error('Erro no cadastro do usuário: ' + err.message);
-    res.status(500).send('Erro interno no servidor');
+    res.status(500).send('Erro interno no ser232vidor');
   }
 });
 
