@@ -6,7 +6,7 @@ body {
 }
 
 h1 {
-    color: #007bff;
+    color: #223346;
     font-size: 24px;
 }
 
@@ -27,7 +27,7 @@ a {
     display: inline-block;
     margin-top: 10px;
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #223346;
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
@@ -35,5 +35,5 @@ a {
 }
 
 a:hover {
-    background-color: #0056b3;
+    background-color: #141d29;
 }

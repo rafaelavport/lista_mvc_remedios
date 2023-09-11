@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const remediosController = require('./controllers/remediosController');
 const mysql = require('mysql2');
+const md5 = require('md5');
 
 const connection = mysql.createConnection({
   host: "sql10.freemysqlhosting.net",
@@ -33,20 +34,35 @@ app.use(session({
 }));
 
 app.get('/', (req, res) => {
-    res.render('login');
-  });
-  
-  app.post('/login', (req, res) => {
-    const { username, password } = req.body;
-  
-    if (username === 'usuario' && password === '123456') {
-      req.session.loggedin = true;
-      req.session.username = username;
-      res.redirect('/cadastro');
-    } else {
-      res.send('Credenciais inválidas. <a href="/login">Tente novamente</a>');
-    }
-  })
+  res.render('login');
+});
+
+app.post('/login', async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+      const query = `SELECT * FROM usuario WHERE username = ? AND password = ?`;
+      const hashedPassword = md5(password);
+
+      db.query(query, [username, hashedPassword], (err, results) => {
+          if (err) {
+              console.error('Erro na consulta ao banco de dados: ' + err.message);
+              res.status(500).send('Erro interno no servidor');
+              return;
+          }
+
+          if (results.length > 0) {
+              res.send('Login bem-sucedido');
+          } else {
+              res.send('Login falhou. Verifique suas credenciais.');
+          }
+      });
+  } catch (err) {
+      console.error('Erro no login: ' + err.message);
+      res.status(500).send('Erro interno no servidor');
+  }
+});
+
 
   app.get('/restrito', (req, res) => {
     if (req.session.loggedin) {

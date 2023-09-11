@@ -6,7 +6,7 @@ body {
 }
 
 h1 {
-    color: #007bff;
+    color: #223346;
     font-size: 24px;
 }
 
@@ -34,7 +34,7 @@ input[type="password"] {
 }
 
 input[type="submit"] {
-    background-color: #007bff;
+    background-color: #223346;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -44,5 +44,5 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #0056b3;
+    background-color: #141e29;
 }
