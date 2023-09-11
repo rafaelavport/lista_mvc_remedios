@@ -64,6 +64,7 @@ app.post('/login', async (req, res) => {
           }
 
           console.log('Usuário cadastrado com sucesso.');
+          res.redirect('/cadastro');
           
         });
       }
@@ -72,10 +73,6 @@ app.post('/login', async (req, res) => {
     console.error('Erro no cadastro do usuário: ' + err.message);
     res.status(500).send('Erro interno no 3servidor');
   }
-});
-
-app.get('/cadastro', (req, res) => {
-  res.render('cadastro');
 });
 
   app.get('/restrito', (req, res) => {
