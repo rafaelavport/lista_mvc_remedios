@@ -64,7 +64,7 @@ app.post('/login', async (req, res) => {
           }
 
           console.log('Usuário cadastrado com sucesso.');
-          res.render('/cadastro');
+          
         });
       }
     });
@@ -73,6 +73,8 @@ app.post('/login', async (req, res) => {
     res.status(500).send('Erro interno no 3servidor');
   }
 });
+
+  res.render('/cadastro');
 
   app.get('/restrito', (req, res) => {
     if (req.session.loggedin) {
