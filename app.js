@@ -42,7 +42,7 @@ app.post('/login', async (req, res) => {
 
   try {
     // Consultar o banco de dados para verificar se o nome de usuário já existe
-    const checkUserQuery = `SELECT * FROM usuario WHERE username = ?`;
+    const checkUserQuery = `SELECT * FROM usuario WHERE username = ${username}`;
 
     db.query(checkUserQuery, [username], (err, results) => {
       if (err) {
