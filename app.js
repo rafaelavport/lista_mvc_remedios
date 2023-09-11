@@ -41,25 +41,37 @@ app.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
   try {
-      const query = `SELECT * FROM usuario WHERE username = ? AND password = ?`;
-      const hashedPassword = md5(password);
+    // Consultar o banco de dados para verificar se o nome de usuário já existe
+    const checkUserQuery = `SELECT * FROM usuario WHERE username = ?`;
 
-      db.query(query, [username, hashedPassword], (err, results) => {
+    db.query(checkUserQuery, [username], (err, results) => {
+      if (err) {
+        console.error('Erro na consulta ao banco de dados: ' + err.message);
+        res.status(500).send('Erro interno no servidor');
+        return;
+      }
+
+      if (results.length > 0) {
+        res.send('Nome de usuário já existe. Escolha outro nome de usuário.');
+      } else {
+        // Nome de usuário não existe, então podemos criar um novo registro
+        const insertUserQuery = `INSERT INTO usuario (username, password) VALUES (?, ?)`;
+        const hashedPassword = md5(password);
+
+        db.query(insertUserQuery, [username, hashedPassword], (err, result) => {
           if (err) {
-              console.error('Erro na consulta ao banco de dados: ' + err.message);
-              res.status(500).send('Erro interno no servidor');
-              return;
+            console.error('Erro na inserção do usuário: ' + err.message);
+            res.status(500).send('Erro interno no servidor');
+            return;
           }
 
-          if (results.length > 0) {
-              res.send('Login bem-sucedido');
-          } else {
-              res.send('Login falhou. Verifique suas credenciais.');
-          }
-      });
+          res.send('Usuário cadastrado com sucesso.');
+        });
+      }
+    });
   } catch (err) {
-      console.error('Erro no login: ' + err.message);
-      res.status(500).send('Erro interno no servidor');
+    console.error('Erro no cadastro do usuário: ' + err.message);
+    res.status(500).send('Erro interno no servidor');
   }
 });
 
