@@ -6,15 +6,20 @@
   <link rel="stylesheet" href="/css/login.css">
 </head>
 <body>
-  <h1>Login</h1>
-  <form method="POST" action="/login">
-    <label for="username">Usuário:</label>
-    <input type="text" id="username" name="username" required><br>
+  <div class="login-container">
+      <div class="pharmacy-icon">
+          <img src="pharmacy-icon.png" alt="Ícone de Farmácia">
+      </div>
+      <h1>Login Farmácia</h1>
+      <form method="POST" action="/login">
+          <label for="username">Usuário:</label>
+          <input type="text" id="username" name="username" required>
 
-    <label for="password">Senha:</label>
-    <input type="password" id="password" name="password" required><br>
+          <label for="password">Senha:</label>
+          <input type="password" id="password" name="password" required>
 
-    <input type="submit" value="Entrar">
-  </form>
-</body>
+          <button type="submit">Entrar</button>
+      </form>
+  </div>
+</body>>
 </html>
