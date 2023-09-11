@@ -64,6 +64,7 @@ app.post('/login', async (req, res) => {
           }
 
           res.send('Usuário cadastrado com sucesso.');
+          res.render('/cadastro');
         });
       }
     });
