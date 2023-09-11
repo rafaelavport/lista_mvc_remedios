@@ -74,7 +74,9 @@ app.post('/login', async (req, res) => {
   }
 });
 
-  res.render('/cadastro');
+app.get('/cadastro', (req, res) => {
+  res.render('cadastro');
+});
 
   app.get('/restrito', (req, res) => {
     if (req.session.loggedin) {
